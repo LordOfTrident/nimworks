@@ -73,6 +73,7 @@ $ ./nimworks
 | Space        | Fire a firework in manual fireworks cannon mode |
 | Left arrow   | Move fireworks cannon left |
 | Right arrow  | Move fireworks cannon right |
+| C            | Enable/disable city background |
 
 ## Bugs
 If you find any bugs, please create an issue and report them.

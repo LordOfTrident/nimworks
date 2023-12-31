@@ -22,6 +22,7 @@ const
     CannonDelay            = 15
     CannonSpeed            = 10
     DelayBarWidth          = WindowWidth / 4
+    CityEnableDelay        = 20
 
 let colors = @[
     sdl2.color(r = 255, g = 255, b = 255, a = SDL_ALPHA_OPAQUE),
@@ -142,7 +143,10 @@ type State = object
     win: sdl2.WindowPtr
     ren: sdl2.RendererPtr
 
-    sparkle: sdl2.TexturePtr
+    sparkle, city: sdl2.TexturePtr
+
+    cityEnableDelay: int
+    renderCityBackground: bool
 
     particles: array[ParticlesCap, Particle]
     fireworks: array[FireworksCap, Firework]
@@ -191,6 +195,17 @@ proc particleExplosion(self: var State, x, y: float, r, g, b: uint8) =
 proc render(self: var State) =
     self.ren.setDrawColor(5, 5, 22, SDL_ALPHA_OPAQUE)
     self.ren.clear()
+
+    if self.renderCityBackground or self.cityEnableDelay > 0:
+        var n = self.cityEnableDelay / CityEnableDelay
+        if self.renderCityBackground:
+            n = 1 - self.cityEnableDelay / CityEnableDelay
+
+        self.city.setTextureAlphaMod(uint8(n * 255))
+        self.ren.copy(self.city, nil, nil)
+
+    if self.cityEnableDelay > 0:
+        dec self.cityEnableDelay
 
     for firework in self.fireworks.mitems:
         if firework.now == 0:
@@ -283,6 +298,11 @@ proc input(self: var State) =
                     of SDL_SCANCODE_RETURN:
                         self.cannonAuto = not self.cannonAuto
 
+                    of SDL_SCANCODE_C:
+                        if self.cityEnableDelay == 0:
+                            self.renderCityBackground = not self.renderCityBackground
+                            self.cityEnableDelay      = CityEnableDelay
+
                     else: discard
 
             else: discard
@@ -292,8 +312,8 @@ proc input(self: var State) =
     if not self.cannonAuto:
         if keyboard[int(SDL_SCANCODE_RIGHT)] == 1:
             self.cannonX += CannonSpeed
-            if self.cannonX >= WindowWidth:
-                self.cannonX = WindowWidth - 1
+            if self.cannonX >= WindowWidth - ParticleWidth:
+                self.cannonX = WindowWidth - ParticleWidth - 1
 
         if keyboard[int(SDL_SCANCODE_LEFT)] == 1:
             self.cannonX -= CannonSpeed
@@ -337,6 +357,7 @@ proc start(self: var State) =
     sdlFailIf self.ren.setLogicalSize(WindowWidth, WindowHeight) != 0: "Failed to set logical size"
 
     self.sparkle = self.loadImage(appDirectory & "res/sparkle.png")
+    self.city    = self.loadImage(appDirectory & "res/city.png")
 
     echo """
 
