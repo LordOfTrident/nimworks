@@ -308,7 +308,7 @@ proc mainLoop(self: var State) =
         self.render()
         self.input()
 
-        sdl2.delay(uint32(FPS / 1000))
+        #sdl2.delay(uint32(FPS / 1000))
 
 proc start(self: var State) =
     sdlFailIf not sdl2.init(INIT_VIDEO): "Failed to initialize SDL"
