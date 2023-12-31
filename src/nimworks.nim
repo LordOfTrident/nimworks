@@ -1,4 +1,4 @@
-import std/random, std/strformat, std/logging, std/math
+import std/os, std/strutils, std/random, std/strformat, std/logging, std/math
 import sdl2, sdl2/image
 
 const
@@ -44,6 +44,10 @@ proc randomColor(): (uint8, uint8, uint8) =
     (color.r, color.g, color.b)
 
 var logger = newConsoleLogger()
+
+let
+    appPath      = getAppFilename()
+    appDirectory = appPath[0 ..< appPath.rfind('/')] & "/"
 
 type SDLException = object of Defect
 
@@ -332,7 +336,7 @@ proc start(self: var State) =
 
     sdlFailIf self.ren.setLogicalSize(WindowWidth, WindowHeight) != 0: "Failed to set logical size"
 
-    self.sparkle = self.loadImage("./res/sparkle.png")
+    self.sparkle = self.loadImage(appDirectory & "res/sparkle.png")
 
     echo """
 
