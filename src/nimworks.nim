@@ -146,8 +146,6 @@ type State = object
     cannonX, cannonDelay: int
     cannonAuto: bool
 
-
-
 proc loadImage(self: var State, path: string): TexturePtr =
     let surface = image.load(path)
     sdlFailIf surface == nil: &"Failed to load image \"{path}\""
