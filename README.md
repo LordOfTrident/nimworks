@@ -31,6 +31,7 @@ A fireworks simulation program i made to practice [Nim](https://nim-lang.org/).
 			<a href="#pre-requisites">Pre-requisites</a>
 			<ul>
 				<li><a href="#debian">Debian</a></li>
+				<li><a href="#arch">Arch</a></li>
 			</ul>
 		</li>
 		<li><a href="#quickstart">Quickstart</a></li>
@@ -52,10 +53,13 @@ Nimworks requires the following dependencies to be installed globally:
 - [SDL2/SDL_mixer](https://github.com/libsdl-org/SDL_mixer)
 
 ### Debian
-You can install them on debian-based distros with the following commands:
 ```
-$ sudo apt install libsdl2-dev
-$ sudo apt install libsdl2-image-dev
+$ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev
+```
+
+### Arch
+```
+$ pacman -S sdl2 sdl2_image sdl2_mixer
 ```
 
 ## Quickstart
