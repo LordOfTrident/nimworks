@@ -49,6 +49,7 @@ A fireworks simulation program i made to practice [Nim](https://nim-lang.org/).
 Nimworks requires the following dependencies to be installed globally:
 - [SDL2](https://github.com/libsdl-org/SDL)
 - [SDL2/SDL_image](https://github.com/libsdl-org/SDL_image)
+- [SDL2/SDL_mixer](https://github.com/libsdl-org/SDL_mixer)
 
 ### Debian
 You can install them on debian-based distros with the following commands:
@@ -74,6 +75,7 @@ $ ./nimworks
 | Left arrow   | Move fireworks cannon left |
 | Right arrow  | Move fireworks cannon right |
 | C            | Enable/disable city background |
+| S            | Enable/disable sound |
 
 ## Bugs
 If you find any bugs, please create an issue and report them.

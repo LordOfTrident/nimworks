@@ -1,5 +1,5 @@
 import std/os, std/strutils, std/random, std/strformat, std/logging, std/math
-import sdl2, sdl2/image
+import sdl2, sdl2/image, sdl2/mixer
 
 const
     WindowWidth            = 1422
@@ -12,14 +12,14 @@ const
     ParticleWidth          = 20
     ParticleHeight         = 20
     FireworkParticlesCount = 50
-    TrailLength            = 20
+    TrailLength            = 17
     ParticleVelocityMin    = 2
     ParticleVelocityMax    = 7
     ParticleLifetime       = 130
     FireworkSpeed          = 10
     FireworkLifetimeMin    = 45
     FireworkLifetimeMax    = 60
-    CannonDelay            = 15
+    CannonDelay            = 18
     CannonSpeed            = 10
     DelayBarWidth          = WindowWidth / 4
     CityEnableDelay        = 20
@@ -144,6 +144,7 @@ type State = object
     ren: sdl2.RendererPtr
 
     sparkle, city: sdl2.TexturePtr
+    sound: mixer.ChunkPtr
 
     cityEnableDelay: int
     renderCityBackground: bool
@@ -154,14 +155,25 @@ type State = object
     cannonX, cannonDelay: int
     cannonAuto: bool
 
+    soundEnabled: bool
+
 proc loadImage(self: var State, path: string): TexturePtr =
     let surface = image.load(path)
-    sdlFailIf surface == nil: &"Failed to load image \"{path}\""
+    sdlFailIf surface == nil:
+        &"Failed to load image \"{path}\""
 
     let texture = sdl2.createTextureFromSurface(self.ren, surface)
-    sdlFailIf texture == nil: &"Failed to load image \"{path}\""
+    sdlFailIf texture == nil:
+        &"Failed to load image \"{path}\""
 
     texture
+
+proc loadSound(self: var State, path: string): mixer.ChunkPtr =
+    let chunk = mixer.loadWAV(path)
+    sdlFailIf chunk == nil:
+        &"Failed to load sound \"{path}\""
+
+    chunk
 
 proc addParticle(self: var State, newParticle: Particle) =
     for particle in self.particles.mitems:
@@ -186,6 +198,9 @@ proc renderSparkle(self: var State, x, y: float, r, g, b, a: uint8, rotation: fl
         self.ren.copyEx(self.sparkle, nil, addr rect, rotation, nil, SDL_FLIP_NONE)
 
 proc particleExplosion(self: var State, x, y: float, r, g, b: uint8) =
+    if self.soundEnabled:
+        discard mixer.playChannel(-1, self.sound, 0)
+
     for i in 1 .. FireworkParticlesCount:
         self.addParticle(createParticle(
             x = x, y = y,
@@ -303,6 +318,9 @@ proc input(self: var State) =
                             self.renderCityBackground = not self.renderCityBackground
                             self.cityEnableDelay      = CityEnableDelay
 
+                    of SDL_SCANCODE_S:
+                        self.soundEnabled = not self.soundEnabled
+
                     else: discard
 
             else: discard
@@ -331,11 +349,23 @@ proc mainLoop(self: var State) =
         #sdl2.delay(uint32(FPS / 1000))
 
 proc start(self: var State) =
-    sdlFailIf not sdl2.init(INIT_VIDEO): "Failed to initialize SDL"
+    sdlFailIf not sdl2.init(INIT_EVERYTHING):
+        "Failed to initialize SDL"
     defer: sdl2.quit()
 
-    sdlFailIf image.init(IMG_INIT_PNG) < 0: "Failed to initialize SDL_image"
+    sdlFailIf image.init(IMG_INIT_PNG) < 0:
+        "Failed to initialize SDL_image"
     defer: image.quit()
+
+    var
+        audioRate:     cint
+        audioFormat:   uint16
+        audioBuffers:  cint = 4096
+        audioChannels: cint = 2
+
+    sdlFailIf mixer.openAudio(audio_rate, audio_format, audio_channels, audio_buffers) < 0:
+        "Failed to initialize SDL_mixer"
+    defer: mixer.closeAudio()
 
     self.win = sdl2.createWindow(
         title = "Nimworks!",
@@ -343,7 +373,8 @@ proc start(self: var State) =
         w = WindowWidth,            h = WindowHeight,
         flags = SDL_WINDOW_RESIZABLE
     )
-    sdlFailIf self.win.isNil: "Failed to create window"
+    sdlFailIf self.win.isNil:
+        "Failed to create window"
     defer: self.win.destroy()
 
     self.ren = sdl2.createRenderer(
@@ -351,13 +382,23 @@ proc start(self: var State) =
         index  = -1,
         flags  = Renderer_Accelerated or Renderer_PresentVsync or Renderer_TargetTexture
     )
-    sdlFailIf self.ren.isNil: "Failed to create renderer"
+    sdlFailIf self.ren.isNil:
+        "Failed to create renderer"
     defer: self.ren.destroy()
 
-    sdlFailIf self.ren.setLogicalSize(WindowWidth, WindowHeight) != 0: "Failed to set logical size"
+    sdlFailIf self.ren.setLogicalSize(WindowWidth, WindowHeight) != 0:
+        "Failed to set logical size"
 
     self.sparkle = self.loadImage(appDirectory & "res/sparkle.png")
     self.city    = self.loadImage(appDirectory & "res/city.png")
+    self.sound   = self.loadSound(appDirectory & "res/fireworks.wav")
+
+    defer: self.sparkle.destroy()
+    defer: self.city.destroy()
+    defer: self.sound.freeChunk()
+
+    self.soundEnabled = true
+    self.cannonAuto   = true
 
     echo """
 
@@ -369,7 +410,6 @@ proc start(self: var State) =
     ▀  ▀ ▀▀▀  ▀▀▀    ▀  ▀▀▀ ▀ ▀ ▀ ▀
 """
 
-    self.cannonAuto = true
     self.mainLoop()
 
 when isMainModule:
