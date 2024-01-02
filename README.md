@@ -1,23 +1,24 @@
 <a name="readme-top"></a>
 <div align="center">
-	<img src="res/logo.png" width="120px">
-	<h1 align="center">🎆 Nimworks 🎇</h1>
-	<p align="center">🎉🥂 Happy new year! 🎊🍾</p>
 	<a href="./LICENSE">
-		<img alt="License" src="https://img.shields.io/badge/license-GPL v3-0fae5e?style=for-the-badge">
+		<img alt="License" src="https://img.shields.io/badge/license-GPL v3-e8415e?style=for-the-badge">
 	</a>
 	<a href="https://github.com/LordOfTrident/nimworks/graphs/contributors">
-		<img alt="Contributors" src="https://img.shields.io/github/contributors/LordOfTrident/nimworks?style=for-the-badge&color=f4852f">
+		<img alt="Contributors" src="https://img.shields.io/github/contributors/LordOfTrident/nimworks?style=for-the-badge&color=f36a3b">
 	</a>
 	<a href="https://github.com/LordOfTrident/nimworks/stargazers">
-		<img alt="Stars" src="https://img.shields.io/github/stars/LordOfTrident/nimworks?style=for-the-badge&color=f4852f">
+		<img alt="Stars" src="https://img.shields.io/github/stars/LordOfTrident/nimworks?style=for-the-badge&color=efb300">
 	</a>
 	<a href="https://github.com/LordOfTrident/nimworks/issues">
-		<img alt="Issues" src="https://img.shields.io/github/issues/LordOfTrident/nimworks?style=for-the-badge&color=4f79e4">
+		<img alt="Issues" src="https://img.shields.io/github/issues/LordOfTrident/nimworks?style=for-the-badge&color=0fae5e">
 	</a>
 	<a href="https://github.com/LordOfTrident/nimworks/pulls">
 		<img alt="Pull requests" src="https://img.shields.io/github/issues-pr/LordOfTrident/nimworks?style=for-the-badge&color=4f79e4">
 	</a>
+	<br><br><br>
+	<img src="./res/logo.png" width="120px">
+	<h1 align="center">🎆 Nimworks 🎇</h1>
+	<p align="center">🎉🥂 A fireworks simulation. Happy new year! 🎊🍾</p>
 	<p align="center">
 		<a href="#demo">View Demo</a>
 		·
