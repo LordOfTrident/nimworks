@@ -93,7 +93,7 @@ $ ./nimworks
 If you find any bugs, please, [create an issue and report them](https://github.com/LordOfTrident/nimworks/issues).
 
 <div align="center">
-	<br><br>
+	<br><hr><br>
 	<a href="https://nim-lang.org/">
 		<img alt="Nim" src="https://img.shields.io/badge/Nim-d9a900?style=for-the-badge&logo=nim&logoColor=white">
 	</a>
