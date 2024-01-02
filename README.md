@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 <div align="center">
-	<img src="res/logo.png" width="150px">
+	<img src="res/logo.png" width="100px">
 	<h1 align="center">🎆 Nimworks 🎇</h1>
 	<p align="center">🎉🥂 Happy new year! 🎊🍾</p>
 	<a href="./LICENSE">
