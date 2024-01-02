@@ -37,7 +37,6 @@ A fireworks simulation program i made to practice [Nim](https://nim-lang.org/).
 		<li><a href="#quickstart">Quickstart</a></li>
 		<li><a href="#controls">Controls</a></li>
 		<li><a href="#bugs">Bugs</a></li>
-		<li><a href="#built-with">Built with</a></li>
 	</ul>
 </details>
 
@@ -84,17 +83,14 @@ $ ./nimworks
 ## Bugs
 If you find any bugs, please create an issue and report them.
 
-## Built with
-<a href="https://nim-lang.org/">
-	<img alt="Nim" src="https://img.shields.io/badge/Nim-d9a900?style=for-the-badge&logo=nim&logoColor=white">
-</a>
-<a href="https://github.com/nim-lang/sdl2">
-	<img alt="SDL2" src="https://img.shields.io/badge/SDL2-1d4979?style=for-the-badge&logoColor=white">
-</a>
-
 <div align="center">
-	<br>
-	<hr>
+	<br><br>
+	<a href="https://nim-lang.org/">
+		<img alt="Nim" src="https://img.shields.io/badge/Nim-d9a900?style=for-the-badge&logo=nim&logoColor=white">
+	</a>
+	<a href="https://github.com/nim-lang/sdl2">
+		<img alt="SDL2" src="https://img.shields.io/badge/SDL2-1d4979?style=for-the-badge&logoColor=white">
+	</a>
 	<p align="center">Made with love ❤️</p>
 </div>
 
