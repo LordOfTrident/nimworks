@@ -84,15 +84,18 @@ $ ./nimworks
 ## Bugs
 If you find any bugs, please create an issue and report them.
 
+## Built with
+<a href="https://nim-lang.org/">
+	<img alt="Nim" src="https://img.shields.io/badge/Nim-d9a900?style=for-the-badge&logo=nim&logoColor=white">
+</a>
+<a href="https://github.com/nim-lang/sdl2">
+	<img alt="SDL2" src="https://img.shields.io/badge/SDL2-1d4979?style=for-the-badge&logoColor=white">
+</a>
+
 <div align="center">
 	<br>
-	<h2 align="center">Built with</h2>
-	<a href="https://nim-lang.org/">
-		<img alt="Nim" src="https://img.shields.io/badge/Nim-d9a900?style=for-the-badge&logo=nim&logoColor=white">
-	</a>
-	<a href="https://github.com/nim-lang/sdl2">
-		<img alt="SDL2" src="https://img.shields.io/badge/SDL2-1d4979?style=for-the-badge&logoColor=white">
-	</a>
+	<hr>
+	<p align="center">Made with love ❤️</p>
 </div>
 
 <p align="right">(<a href="#readme-top">Back to top</a>)</p>
