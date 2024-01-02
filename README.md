@@ -18,14 +18,20 @@
 	<a href="https://github.com/LordOfTrident/nimworks/pulls">
 		<img alt="Pull requests" src="https://img.shields.io/github/issues-pr/LordOfTrident/nimworks?style=for-the-badge&color=4f79e4">
 	</a>
-	<br><br><br>
+	<p align="center">
+		<a href="#demo">View Demo</a>
+		·
+		<a href="https://github.com/LordOfTrident/nimworks/issues">Report Bug</a>
+		·
+		<a href="https://github.com/LordOfTrident/nimworks/issues">Request Feature</a>
+	</p>
+	<br>
 </div>
-
-A fireworks simulation program i made to practice [Nim](https://nim-lang.org/).
 
 <details>
 	<summary>Table of contents</summary>
 	<ul>
+		<li><a href="#introduction">Introduction</a></li>
 		<li><a href="#demo">Demo</a></li>
 		<li>
 			<a href="#pre-requisites">Pre-requisites</a>
@@ -39,6 +45,9 @@ A fireworks simulation program i made to practice [Nim](https://nim-lang.org/).
 		<li><a href="#bugs">Bugs</a></li>
 	</ul>
 </details>
+
+## Introduction
+A fireworks simulation program i made for new year 2024 to practice the [Nim programming language](https://nim-lang.org/).
 
 ## Demo
 <p align="center">
@@ -81,7 +90,7 @@ $ ./nimworks
 | S            | Enable/disable sound |
 
 ## Bugs
-If you find any bugs, please create an issue and report them.
+If you find any bugs, please, [create an issue and report them](https://github.com/LordOfTrident/nimworks/issues).
 
 <div align="center">
 	<br><br>
@@ -91,7 +100,7 @@ If you find any bugs, please create an issue and report them.
 	<a href="https://github.com/nim-lang/sdl2">
 		<img alt="SDL2" src="https://img.shields.io/badge/SDL2-1d4979?style=for-the-badge&logoColor=white">
 	</a>
-	<p align="center">Made with love ❤️</p>
+	<p align="center">Made with ❤️ love</p>
 </div>
 
 <p align="right">(<a href="#readme-top">Back to top</a>)</p>
